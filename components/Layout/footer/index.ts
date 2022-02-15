@@ -1,0 +1,5 @@
+export { default as Footer } from './Footer'
+export { default as FooterPlayer } from './player/FooterPlayer'
+export { default as FooterSong } from './FooterSong'
+export { default as FooterActions } from './FooterActions'
+export { default as FooterVolumes } from './Volumes'

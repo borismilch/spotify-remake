@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+
+  .tooltip {
+    @apply bg-gray-900 text-white rounded-lg p-2 text-xs drop-shadow-md transition-all duration-200 opacity-0 invisible group-hover:opacity-90 group-hover:visible absolute font-semibold px-3 whitespace-nowrap
+  }
+
+  .avatar {
+    @apply relative rounded-full overflow-hidden 
+  }
+  
+  .avatar_xl {
+    @apply avatar w-[194px] h-[194px] 
+  }
+
+  .avatar_sm {
+    @apply avatar w-[28px] h-[28px] 
+  }
+
+  .avatar_sd {
+    @apply avatar w-[44px] h-[44px] 
+  }
+
+  .avatar_lg {
+    @apply avatar w-[180px] h-[180px] 
+  }
+
+  .album_image_xs {
+    @apply relative overflow-hidden w-[50px] h-[50px] shadow-sm shadow-[#121212] flex-shrink-0
+  }
+
+  .album_image_small {
+    @apply relative overflow-hidden w-[80px] h-[80px] shadow-sm shadow-[#121212] flex-shrink-0
+  }
+
+  .card_content {
+    @apply relative h-[160px]  rounded-md shadow-lg shadow-[#121221]  w-full overflow-hidden
+  }
+
+  body {
+    @apply overflow-x-hidden font-sans
+  }
+
+  .login_button {
+    @apply flex items-center justify-center p-2 rounded-full bg-green-500 transition-all duration-200 cursor-pointer hover:bg-green-600 
+    active:scale-90 text-white font-semibold
+  }
+
+  .link_item {
+    @apply flex text-title rounded-md w-full hover:text-white gap-3 p-2 hover:bg-cardHover items-center cursor-pointer transition-all duration-200 active:scale-95
+  }
+
+  .sidebar_action {
+    @apply flex bg-gray-300 items-center justify-center w-[25px] h-[25px]
+  }
+
+  .button {
+    @apply flex items-center gap-3 text-desc hover:text-white transition-all duration-200 hover:bg-cardHover cursor-pointer active:scale-95 border-t border-gray-400 font-medium p-2 rounded-md rounded-t-none
+  }
+
+
+  .navigation_button {
+    @apply bg-black shadow-lg rounded-full p-2 transition-all duration-200 hover:bg-cardHover cursor-pointer active:scale-95
+  }
+
+  .avatar_badge {
+    @apply flex items-center rounded-full drop-shadow-lg bg-black pr-3 cursor-pointer  p-1 gap-2 text-text transition-all duration-200 hover:bg-cardHover active:scale-95
+  }
+
+  .dropList {
+    @apply bg-black text-white shadow-xl p-1 rounded-md opacity-0 transition-all duration-200  overflow-hidden flex flex-col
+  }
+
+  .play_button {
+    @apply bg-play transition-all duration-200 shadow-lg shadow-[#101010] text-black rounded-full w-[50px] h-[50px] flex items-center justify-center hover:scale-105 active:scale-90  active:hover:scale-90
+  }
+
+  .greet_item {
+    @apply flex items-center transition-all duration-200 hover:bg-[rgba(255,255,255,0.2)] cursor-pointer flex-grow-0 h-[80px] bg-l2 gap-2 w-full rounded-lg overflow-hidden
+  }
+
+  .card_wrapper {
+    @apply flex flex-col transition-all duration-200 p-3 w-full rounded-lg bg-card hover:bg-cardHover
+  } 
+
+  .upper_transition {
+    @apply transform right-5 bottom-20 absolute translate-y-[20px] transition-all duration-300 opacity-0 group-hover:translate-y-[-10px] group-hover:opacity-100
+  }
+
+  .app_icon {
+    @apply text-gray-600 transition-all duration-200 hover:text-green-600 text-xl cursor-pointer hover:scale-110 active:hover:scale-90
+  }
+
+  .overlay {
+    @apply absolute h-[320px] lay_small inset-0
+  }
+
+  .overlay_icon {
+    @apply text-desc transition-all duration-200 hover:text-title text-4xl cursor-pointer active:scale-95 
+  }
+  .modal_overlay {
+    @apply flex items-center justify-center w-screen h-screen z-[100] bg-black bg-opacity-60
+  }
+
+  .modal_button {
+    @apply rounded-full p-2 font-bold w-[160px] mt-3 ml-auto text-[#212121] uppercase transition-all duration-200 bg-white hover:bg-[#151515] hover:text-white active:scale-90 cursor-pointer text-xs disabled:opacity-50
+  }
+  .modal_input {
+    @apply border-0 rounded-md w-[270px] bg-[#393939] focus:border-0 focus:ring-0  text-title font-medium
+  }
+
+  .over {
+    @apply inset-0 bg-black bg-opacity-50 flex justify-center items-center transition-all duration-300 opacity-0 hover:opacity-100
+  }
+
+  .audio_toggler {
+    @apply app_icon text-3xl text-title hover:text-title hover:scale-110 active:scale-90 transition-all duration-200 active:hover:scale-90
+  }
+
+  .overlay_content {
+    @apply inset-0 flex items-center justify-center
+    absolute bg-black bg-opacity-50 hover:opacity-100 opacity-0 transition-all duration-300 z-50
+  }
+
+}
+
+.logo {
+  color: white;
+  height: 40px;
+  max-width: 131px;
+  width: 100%;
+}
+
+.lay {
+  background: linear-gradient(
+    180deg,
+    rgba(233, 20, 41, 0) 2%,
+    rgba(0, 0, 0, 0.62773812943146) 100%
+  );
+}
+
+.lay_small {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.4473739837731968) 2%,
+    rgba(18, 18, 18, 1) 100%
+  );
+}
