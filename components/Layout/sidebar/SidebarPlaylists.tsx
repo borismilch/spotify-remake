@@ -21,6 +21,7 @@ const SidebarPlaylists = () => {
       {
         playlists?.docs.map(item => (
           <Link 
+            key={item.id}
             href={'/playlist/' + item.id}
           >
             <p className='sidebar_playlist_link'>

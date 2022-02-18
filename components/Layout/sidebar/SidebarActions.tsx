@@ -36,7 +36,7 @@ const SidebarActions = () => {
       <div className='flex flex-col pb-4 border-b  border-gray-400 border-opacity-20'>
         {
           actions.map(item => (
-            <SidebarAction action={item} />
+            <SidebarAction key={item.text} action={item} />
           ))
         }
       </div>

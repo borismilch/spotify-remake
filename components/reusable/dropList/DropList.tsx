@@ -23,7 +23,7 @@ const DropList: React.FC<DropListProps> = (props) => {
 
       {
         items.map(item => (
-          <DropItem item={item} />
+          <DropItem key={item.title} item={item} />
         ))
       }
 

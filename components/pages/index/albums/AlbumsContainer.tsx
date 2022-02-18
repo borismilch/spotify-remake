@@ -8,7 +8,7 @@ import { IAlbum } from '@/models/.'
 
 import { useCollection } from 'react-firebase-hooks/firestore'
 
-const AlbumsContainer = React.memo(() => {
+const AlbumsContainer = () => {
   const albumsRef = collection(firestore, 'albums')
   const AlbumsList = dynamic(() => import('@/components/reusable/albums/CardList'))
 
@@ -21,6 +21,6 @@ const AlbumsContainer = React.memo(() => {
       } />}
     </div>
   )
-})
+}
 
-export default AlbumsContainer
+export default React.memo(AlbumsContainer)

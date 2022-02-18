@@ -10,7 +10,7 @@ interface PageTitleProps {
   rounded?: boolean
 }
 
-const PageTitleContent: React.FC<PageTitleProps> = React.memo((props) => {
+const PageTitleContent: React.FC<PageTitleProps> = (props) => {
   const {picture, subtitle, title, type, overlayContent, changeble = false, rounded = true} = props
 
   return (
@@ -34,6 +34,6 @@ const PageTitleContent: React.FC<PageTitleProps> = React.memo((props) => {
         </div>
       </div>
   )
-})
+}
 
-export default PageTitleContent
+export default React.memo(PageTitleContent)

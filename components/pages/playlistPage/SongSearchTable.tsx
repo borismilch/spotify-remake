@@ -34,7 +34,7 @@ const SongSearchTable: React.FC<SongSearchTableProps> = (props) => {
       <TableContext.Provider value={contextValue}>
         {
           filteredSongs?.map((item, idx) => (
-            <React.Suspense fallback={<p>Loading...</p>}>
+            <React.Suspense key={item.id} fallback={<p>Loading...</p>}>
             <SongsTableItem 
               idx={idx} 
               song={item}
@@ -47,7 +47,7 @@ const SongSearchTable: React.FC<SongSearchTableProps> = (props) => {
 
         {
          filteredAlbums?.map((item, idx) => (
-          <React.Suspense fallback={<p>Loading...</p>}>
+          <React.Suspense key={item.id} fallback={<p>Loading...</p>}>
             <AlbumTableItem 
               album={item} 
               index={idx + filteredSongs.length} 

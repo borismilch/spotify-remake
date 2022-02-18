@@ -54,10 +54,11 @@ const PlayerActions: React.FC<PlayerActionsProps> = (props) => {
     <div className='flex items-center justify-center z-10 gap-3'>
    
       {
-        actionArray.map(({Icon, onClick}) => (
+        actionArray.map(({Icon, onClick}, idx) => (
           <AppIcon 
             onclick={onClick}
             Icon={Icon}
+            key={idx}
           />
         ))
       }
