@@ -26,7 +26,7 @@ const EditModal: React.FC<EditModalProps> = (props) => {
   }, [])
 
   const saveChanges = async () => {
-    const bindColor =( await analyze(dataUrl))[0].color
+    const bindColor =( await analyze(dataUrl, { ignore: [ 'rgb(255,255,255)', 'rgb(0,0,0)' ] }))[0].color
 
     onComplete(value, url ? url : dispalayImage, bindColor)
   }

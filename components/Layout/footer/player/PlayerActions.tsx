@@ -1,8 +1,10 @@
 import React, { ReactElement } from 'react'
 
-import { useAppSelector } from '@/hooks/redux' 
+import { useAppSelector, useAppDispatch } from '@/hooks/redux' 
 
 import AppIcon, { AiFillBackward, AiFillForward, AiFillPauseCircle, AiFillPlayCircle, TiArrowShuffle, TiArrowSync } from '@/icons/.'
+
+import { goNext, goPrevios } from '@/store/actions'
 
 interface IActionItem  {
   Icon: ReactElement<any, any>,
@@ -17,14 +19,16 @@ interface PlayerActionsProps {
 
 const PlayerActions: React.FC<PlayerActionsProps> = (props) => {
 
+  const dispatch = useAppDispatch()
+
   const { togglePaused, refreshTime, shuffleCurrentTime } = props
-  const { paused } = useAppSelector((state => state.song))
+  const { paused } = useAppSelector((state => state.audio))
 
   const actionArray: IActionItem[]= [
     
     {
       Icon: <AiFillBackward  className="app_icon text-desc" />,
-      onClick: () => {}
+      onClick: () => dispatch(goPrevios())
     },
     {
       Icon: <TiArrowShuffle  className="app_icon text-desc" />,
@@ -42,7 +46,7 @@ const PlayerActions: React.FC<PlayerActionsProps> = (props) => {
     },
     {
       Icon: <AiFillForward  className="app_icon text-desc"/>,
-      onClick: () => {}
+      onClick: () => dispatch(goNext())
     },
 
   ]

@@ -109,6 +109,12 @@
   .modal_button {
     @apply rounded-full p-2 font-bold w-[160px] mt-3 ml-auto text-[#212121] uppercase transition-all duration-200 bg-white hover:bg-[#151515] hover:text-white active:scale-90 cursor-pointer text-xs disabled:opacity-50
   }
+
+  .song_add_button {
+    @apply modal_button hover:text-[#212121] uppercase transition-all duration-200 hover:bg-white bg-[#151515] text-white border border-desc border-opacity-30
+
+  }
+
   .modal_input {
     @apply border-0 rounded-md w-[270px] bg-[#393939] focus:border-0 focus:ring-0  text-title font-medium
   }
@@ -121,9 +127,32 @@
     @apply app_icon text-3xl text-title hover:text-title hover:scale-110 active:scale-90 transition-all duration-200 active:hover:scale-90
   }
 
-  .overlay_content {
+.overlay_content {
     @apply inset-0 flex items-center justify-center
     absolute bg-black bg-opacity-50 hover:opacity-100 opacity-0 transition-all duration-300 z-50
+  }
+
+  .song_item {
+    @apply w-full p-2 rounded-md hover:bg-cardHover transition-all duration-75 flex items-center justify-between
+  }
+
+  .sidebar_playlist_link {
+    @apply text-desc p-2 truncate rounded-md transition-all duration-200 cursor-pointer hover:bg-cardHover active:scale-95 font-semibold text-sm
+  }
+
+  .table_number_enumaration {
+    @apply flex mx-2 
+    font-bold 
+    text-desc 
+    items-center 
+    group-hover:hidden
+  }
+  .cleanInput {
+    @apply border-0 focus:border-0 focus:ring-0 bg-transparent focus:border-transparent
+  }
+
+  .more {
+    @apply font-bold text-gray-500 cursor-pointer hover:text-title transition-all duration-200 active:scale-95 uppercase
   }
 
 }

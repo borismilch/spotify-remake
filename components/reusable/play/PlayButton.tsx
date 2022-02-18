@@ -1,50 +1,95 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import { FaPlay, FaPause } from 'react-icons/fa'
 import { ITrack } from '@/models/.'
 
 import { useAppSelector, useAppDispatch } from '@/hooks/redux'
 import { setCurrentTrack } from '@/store/actions'
 
+import { setQueue } from '@/store/actions'  
+
+import { IoPlaySharp, IoPauseSharp } from 'react-icons/io5'
+
 import { setPaused } from '@/store/actions'
+import { setCurrentIndex, setGroup } from '@/store/reducers/song.reducer'
 
 interface PlayButtonProps {
-  onClick: Function,
+  onClick?: Function,
   playedElement: ITrack,
   category: string,
-  isAlbum?: boolean 
+  isSong?: boolean,
+  big?: boolean,
+  thin?: boolean,
+  index?: number,
+  tracks: ITrack[]
 }
 
 const PlayButton: React.FC<PlayButtonProps> = (props) => {
 
-  const { onClick, playedElement, category, isAlbum = false } = props
+  const { 
+     playedElement, 
+     category, 
+     isSong = false,
+     big = false,
+     thin = false,
+     index = 0,
+     tracks
+  } = props
 
   const dispatch = useAppDispatch()
-  const {paused, currentIndex, currentTrack} = useAppSelector(state => state.song)
+  const {currentIndex, currentTrack, group} = useAppSelector(state => state.song)
  
-  const isSameTrack = currentTrack?.albumId === playedElement?.albumId 
+  const { paused } = useAppSelector(state => state.audio)
 
-  const setOrPauseCurrent = () => {
-    console.log('calll')
-    if (isSameTrack){
+  const isSameTrack = currentTrack?.albumId === playedElement?.albumId &&  group === category
+  const isSameSong = isSameTrack && currentTrack.id === playedElement.id
+
+  const isActive = isSong ? isSameSong : (isSameTrack)
+  const thinButtoClass = isActive ? 'text-green-500' : 'text-title'
+
+  const setOrPauseCurrent = (e: SyntheticEvent<HTMLButtonElement>) => {
+
+    e.stopPropagation()
+
+    if (isActive){
       dispatch(setPaused(!paused))
-      console.log('sss', currentTrack, playedElement.albumId, paused)
+      
+     
     } else {
       dispatch(setCurrentTrack(({...playedElement, category}) as ITrack))
-      console.log('nonono')
+      dispatch(setCurrentIndex(index))
+      dispatch(setQueue(tracks))
+      dispatch(setGroup(category))
     }
   }
   
   return (
-    <button 
-      onClick={setOrPauseCurrent.bind(null)}
-      className='play_button'
-    >
-      { !(isSameTrack && paused) ? 
-         <FaPlay className=' text-black' />: 
-         <FaPause className='text-black' />
-      }
+    <>
+    {
+     !thin ? (
+      <button 
+        onClick={setOrPauseCurrent.bind(null)}
+        className={'play_button ' + (big && ('p-4 text-lg w-[58px] h-[58px]'))}
+      >
+        { !(isActive && paused) ? 
+          <FaPlay className=' text-black' />: 
+          <FaPause className='text-black' />
+        }
 
-    </button>
+      </button>
+    ) : (
+      <button
+        onClick={setOrPauseCurrent}
+      >
+        { !(isActive && paused)  ? 
+          <IoPlaySharp className={thinButtoClass + ' text-2xl'} />: 
+          <IoPauseSharp className='text-green-500 text-2xl' />
+        }
+      </button>
+    )
+    }
+
+    </>
+  
   )
 }
 

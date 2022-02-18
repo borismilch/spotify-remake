@@ -15,16 +15,20 @@ const AlbumPage = () => {
 
   const { query: { id } } = useNavigation()
 
-  const albumref = doc(firestore, 'albums', id ? id.toString() : 'dd')
+  const albumref = doc(firestore, 'albums', id ? id.toString().split('_')[0] : 'dd')
   const [currentAlbum] = useDocumentDataOnce<DocumentData>(albumref)
 
-  const PageContent = dynamic (() => import('@/components/pages/albumPage/AlbumContent'))
+    const PageContent = dynamic (() => import('@/components/pages/albumPage/AlbumContent'))
 
   return (
     <ProtectedRoute>
       <Layout title={currentAlbum?.title + ' | nedofy'} >
 
-      { currentAlbum && <PageContent currentAlbum={currentAlbum as any} /> }
+      { currentAlbum && 
+        <PageContent 
+          currentAlbum={currentAlbum as any} 
+          group={id.toString().split('_')[1]}
+        /> }
       
       </Layout>
 

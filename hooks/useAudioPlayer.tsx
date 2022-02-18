@@ -1,69 +1,65 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, RefObject } from 'react'
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from './redux' 
 
-import { setCurrentTime, setCurrentTrack, setFullTime, setVolume, setPaused } from '@/store/actions'
+import { goNext } from '@/store/actions'
+import { setCurrentTime, setFullTime, setPaused } from '@/store/actions'
 
-const useAudioPlayer = () => {
 
-  const [audio, setAudio] = useState<HTMLAudioElement>(null) 
+const useAudioPlayer = (audio: RefObject<HTMLAudioElement>) => {
 
   const dispatch = useAppDispatch()
-  const { currentTime, fullTime, volume, currentTrack, paused } = useAppSelector(state => state.song)
+  const { currentTrack } = useAppSelector(state => state.song)
+  const { currentTime, fullTime, volume, paused } = useAppSelector(state => state.audio)
   
   useEffect(() => {
-    if (currentTrack && audio) {
-      audio.src = currentTrack.audio
-     
-      audio.onloadedmetadata = () => {
-        dispatch(setFullTime(audio.duration))
-      }
-      dispatch(setPaused(true))
-      audio.play()
-    }
+    startAudio()
   }, [currentTrack])
 
   useEffect(() => {
 
-    let newAudio
+    if (!audio.current) { return }
 
-    if (audio) {
-      newAudio = audio
-    } else {
-      newAudio = new Audio()
+    try {
+      audio.current.ontimeupdate = () => {
+       if (audio.current?.currentTime) {
+        dispatch(setCurrentTime(audio?.current?.currentTime))
+       }
+        
+      }
+    } catch {}
+
+  
+    audio.current.onloadedmetadata = () => {
+      dispatch(setFullTime(audio?.current.duration))
     }
 
-    newAudio.ontimeupdate = (current) => {
-      dispatch(setCurrentTime(newAudio?.currentTime))
-      
-    }
-    newAudio.onloadedmetadata = () => {
-      dispatch(setFullTime(newAudio.duration))
+    audio.current.onended = () => {
+      dispatch(goNext())
     }
 
-    setAudio(newAudio)
+    if (currentTrack ) {
+      startAudio()
+      audio.current.currentTime = currentTime
+    }
 
   }, [])
 
   useEffect(() => {
     if (audio) {
-      audio.volume = (volume / 100)
+      audio.current.volume = (volume / 100)
     }
   }, [volume])
 
   useEffect(() => {
-    console.log('ddd')
     if (audio) {
       if (paused) {
-        console.log('play')
-        audio.play()
+        audio.current.play()
       } 
       else {
-        audio.pause()
-        console.log('puse')
+        audio.current.pause()
       }
-
     }
   }, [paused])
 
@@ -75,21 +71,36 @@ const useAudioPlayer = () => {
     }
   }
 
+  function startAudio () {
+    if (currentTrack && audio.current) {
+      audio.current.src = currentTrack.audio
+     
+      audio.current.onloadedmetadata = () => {
+        dispatch(setFullTime(audio.current.duration))
+      }
+      dispatch(setPaused(true))
+      audio.current.play()
+    } else {
+      audio.current.src = null
+      audio.current.onloadeddata = () => {}
+    }
+  }
+
   const changeTime = (e: ChangeEvent<HTMLInputElement>) => {
-    audio.currentTime = +e.target.value
+    audio.current.currentTime = +e.target.value
     dispatch(setCurrentTime(+e.target.value))
   }
 
   const refreshTime = () => {
     dispatch(setCurrentTime(0))
-    audio.currentTime = 0
+    audio.current.currentTime = 0
   }
 
   const shuffleCurrentTime = () => {
     const randomTime  = Math.floor(Math.random() * fullTime)
 
     dispatch(setCurrentTime(randomTime))
-    audio.currentTime = randomTime
+    audio.current.currentTime = randomTime
   }
 
   return {currentTime, fullTime, shuffleCurrentTime, currentTrack, changeTime, refreshTime, togglePaused}

@@ -15,6 +15,7 @@ const Home: NextPage = () => {
   const Greet = dynamic(() => import('@/components/pages/index/greet/Greet'))
   const AlbumsContainer = dynamic(() => import('@/components/pages/index/albums/AlbumsContainer'))
 
+ 
   return (
     <ProtectedRoute>
       <Layout title={user?.displayName + ' | Shopify'}>

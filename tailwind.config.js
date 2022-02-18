@@ -21,7 +21,9 @@ module.exports = {
         desc: '#8d8d8d',
         text: '#808080',
         light: '#3e3e3e',
-        l2: "#2d2b2b"
+        l2: "#2d2b2b",
+        borderColor: "#202022",
+        activeColor: "#176232"
         
       }
     },

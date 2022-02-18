@@ -1,11 +1,15 @@
 import React from 'react'
-import { IAlbum } from '@/models/.'
+import { IAlbum, ITrack } from '@/models/.'
 
 import { PlayButton } from '@/components/reusable/.'
 import Image from 'next/image'
 import { useImageLoader } from '@/hooks/.'
 
 import { useNavigation } from '@/hooks/.'
+
+import { firestore } from '@/lib/firebase'
+import { collection } from 'firebase/firestore'
+import { useCollectionOnce } from 'react-firebase-hooks/firestore' 
 
 import { CardLoader } from '@/components/loaders'
 
@@ -16,23 +20,28 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({album, category}) => {
 
+  const fireref = collection(firestore, 'albums', album.id, 'tracks')
+
+  const [tracks] = useCollectionOnce(fireref)
+
+  const readyTracks: any[] = tracks?.docs.map(item => ({...item.data(), id: item.id}))
+
   const [loaded, onLoad] = useImageLoader()
   const { pushRouter } = useNavigation()
 
   return (
     <div
-      onClick={pushRouter.bind(null, '/album/' + album.id)}
+      onClick={pushRouter.bind(null, '/album/' + album.id + "_" + category)}
       className='card_wrapper group relative'>
 
       {<div className={'flex flex-col ' + (!loaded && 'opacity-0 absolute invisible')}>      
         <div className='card_content'>
-          {album.banner &&  <Image 
+          {album.banner &&  <img 
               onLoad={onLoad.bind(null)}
               src={album.banner}
               alt={album.title}
-              layout="fill"
-              objectFit='cover'
-            />}
+              className={'object-cover w-full h-full'} />
+          } 
           </div>
         
         <div className='flex flex-col pt-4'>
@@ -48,9 +57,11 @@ const Card: React.FC<CardProps> = ({album, category}) => {
 
         <div className='upper_transition'>
           <PlayButton 
+            tracks={readyTracks ? readyTracks : []}
+
             category={category}
             onClick={() => {console.log(album.tracks[0])}}
-            playedElement={album.tracks[0]}
+            playedElement={readyTracks ? readyTracks[0] : {}}
           />
         </div>
 

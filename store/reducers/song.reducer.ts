@@ -2,52 +2,67 @@ import { ITrack } from '@/models/.'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface SongReducerState {
-  volume: number,
-  currentTime: number,
-  fullTime: number,
+ 
   currentTrack: ITrack ,
-  paused: boolean,
-  currentIndex: number
+  currentIndex: number,
+  queue: ITrack[],
+  group: string
 }
 
 const initialState: SongReducerState = {
-  volume: 40,
-  currentTime: 0,
-  fullTime: 0,
+
   currentTrack: null,
-  paused: false,
-  currentIndex: 0
+
+  currentIndex: 0,
+  queue: [],
+  group: ''
 }
 
 const slice = createSlice({
   name: 'songReducer',
   initialState,
   reducers: {
-    setCurrentTime: (state, action: PayloadAction<number>) => {
-       state.currentTime = action.payload
-    },
-    setVolume: (state, action: PayloadAction<number>) => {
-      state.volume = action.payload
-    },
-
-    setFullTime: (state, action: PayloadAction<number>) => {
-      state.fullTime = action.payload
-    },
-
     setCurrentTrack: (state, action: PayloadAction<ITrack>) => {
       state.currentTrack = action.payload
     },
 
-    setPaused: (state, action: PayloadAction<boolean>) => {
-      state.paused = action.payload
-    },
-
     setCurrentIndex: (state, action: PayloadAction<number>) => {
       state.currentIndex = action.payload
-    }
+    },
+
+    setQueue (state, action: PayloadAction<ITrack[]>) {
+      console.log('ququququq', action.payload)
+      state.queue = action.payload
+    },
+
+    setGroup (state, action: PayloadAction<string>) {
+      state.group = action.payload
+    },
+
+    goPrevios: (state) => {
+      if (state.currentIndex - 1 < 0) {
+        state.currentIndex = state.queue.length - 1
+        state.currentTrack = state.queue[state.queue.length - 1]
+      }
+      else {
+        state.currentIndex-- 
+        state.currentTrack = state.queue[state.currentIndex]
+      }
+    },
+
+    goNext: (state) => {
+      if (state.currentIndex + 1 === state.queue.length) {
+        state.currentIndex = 0
+        state.currentTrack = state.queue[0]
+      }
+      else {
+        state.currentIndex++
+        state.currentTrack = state.queue[state.currentIndex]
+      }
+    },
   }
 })
 
 export const songReducer = slice.reducer 
 
-export const { setCurrentTime, setFullTime,setVolume, setCurrentTrack, setPaused, setCurrentIndex } = slice.actions
+export const { setCurrentTrack, setCurrentIndex, setQueue, goNext, goPrevios, setGroup } = slice.actions

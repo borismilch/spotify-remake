@@ -7,8 +7,7 @@ import Image from 'next/image'
 import { firestore } from '@/lib/firebase'
 import { collection } from 'firebase/firestore'
 import { useCollectionDataOnce } from 'react-firebase-hooks/firestore'
-
-import { EditTrigger } from '.'
+import { EditUserTrigger } from '.'
 
 const ProfileBanner = () => {
 
@@ -19,7 +18,6 @@ const ProfileBanner = () => {
   const AlbumList = dynamic(() => import('@/components/reusable/albums/CardList'))
   
   const albumsRef = collection(firestore, 'albums')
-
   const [albums] = useCollectionDataOnce(albumsRef)
 
   return (
@@ -43,7 +41,7 @@ const ProfileBanner = () => {
         title={user?.displayName}
         changeble
         overlayContent={
-          <EditTrigger />
+          <EditUserTrigger />
         }
         
       />

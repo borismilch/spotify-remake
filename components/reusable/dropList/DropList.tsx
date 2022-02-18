@@ -3,7 +3,7 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import { IDropItem } from '@/models/.'
 
-interface DropListProps {
+export interface DropListProps {
   items: IDropItem[], 
   open: boolean, 
   close: () => void

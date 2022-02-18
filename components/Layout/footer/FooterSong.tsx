@@ -7,9 +7,28 @@ import { AiFillHeart, AiOutlineHeart, RiPictureInPictureExitFill } from '@/icons
 
 const defaultImage = 'https://www.businessplatform.ae/wp-content/uploads/2013/05/placeholder3.png'
 
+import { firestore } from '@/lib/firebase'
+import { useDocument } from 'react-firebase-hooks/firestore'
+import { userSelector, selectCurrentTrack } from '@/store/selectors'
+import { doc } from 'firebase/firestore'
+
+import { TrackService } from '@/service/.'
+
+import AppIcon from '@/components/icons/AppIcon'
+
 const FooterSong = () => {
 
-  const { currentTrack } = useAppSelector(state => state.song)
+  const currentTrack = useAppSelector(selectCurrentTrack)
+  const user = useAppSelector(userSelector)
+
+  const likesref = doc(firestore, 'users', user?.uid || 'ff', 'likes', currentTrack?.id || 'dd')
+  const [like] = useDocument(likesref)
+
+  const isLiked = !!like?.data()
+
+  const rateTrack = async () => {
+    await TrackService.likeOrDislikeTrack(currentTrack, user.uid)
+  }
 
   return (
     <div className='flex items-center gap-3 z-10 w-full'> 
@@ -30,7 +49,19 @@ const FooterSong = () => {
 
       <div className='flex items-center gap-2'>
 
-        <AiOutlineHeart className='text-gray-500 text-2xl app_icon' />
+       { !isLiked ?  
+           (<AppIcon
+            onclick={rateTrack}
+            Icon={<AiOutlineHeart className={'app_icon'} />} 
+            classes={'opacity-0 group-hover:opacity-100'}
+          />) : (
+            <AppIcon
+              onclick={rateTrack}
+              Icon={<AiFillHeart className={'app_icon text-green-500'} />} 
+            />
+          )
+       }
+        
 
         <RiPictureInPictureExitFill className='app_icon ' />
 

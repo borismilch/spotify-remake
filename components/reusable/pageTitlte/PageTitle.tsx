@@ -28,12 +28,12 @@ const PageTitle: React.FC<PageTitlteProps> = (props) => {
   }, [])
 
   return (
-    <div className='flex flex-col relative overflow-auto scrollbar-none'>
+    <div className='flex flex-col h-full relative overflow-auto scrollbar-none'>
 
     <div className={`inset-0 -top-[70px] absolute h-[345px]`} style={{backgroundColor: bgColor}} />
     <div className={`inset-0 -top-[70px] absolute h-[345px] z-10 lay`} />
 
-    <div className="p-9 pb-7 z-30">
+    <div className="p-8 pt-6 z-30">
 
       {titleContent}
        
@@ -45,7 +45,7 @@ const PageTitle: React.FC<PageTitlteProps> = (props) => {
       <div className={`absolute h-[200px] lay_small top-[275px] inset-0 z-10`}></div>
       <div className={`absolute h-[200px] lay_small top-[275px] inset-0`} style={{backgroundColor:bgColor}} />
 
-      <div className='z-30 p-6'>
+      <div className='z-30 p-6 pt-2'>
          {children}
       </div>
     </div>

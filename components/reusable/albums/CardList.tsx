@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { IAlbum } from '@/models/.'
 import dynamic from 'next/dynamic'
+
+import { TrackService } from '@/service/.' 
+import { tracks } from '@/utils/mock/trackItems'
 
 interface CardListProps {
   albums: IAlbum[], 
@@ -11,7 +14,15 @@ const CardList: React.FC<CardListProps> = React.memo(({albums, title}) => {
   const AlbumsCard = dynamic(() => import('./Card'))
 
   const calculateCount = () => Math.floor(window.innerWidth / 240)   
-  
+
+  // const iterateAlbums = () => {
+  //   albums.forEach(item => {
+  //     tracks.forEach(async track => {
+  //       await TrackService.addTrack(item.id, track, item.title, item.banner)
+  //     })
+  //   })
+  // }
+
 
   return (
     <>

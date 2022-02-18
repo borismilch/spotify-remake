@@ -9,4 +9,5 @@ export interface ITrack {
   authorId: string
   albumImg?: string
   category?: string 
+  id: string
 }

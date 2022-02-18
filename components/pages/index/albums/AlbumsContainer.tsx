@@ -1,14 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import dynamic from 'next/dynamic'
 
-import { onSnapshot, collection } from 'firebase/firestore'
-import { AlbumsStore } from '@/store/actions'
-
+import { collection } from 'firebase/firestore'
 import { firestore } from '@/lib/firebase'
-import { useAppSelector, useAppDispatch } from '@/hooks/redux'
+
 import { IAlbum } from '@/models/.'
 
-import { useMemo } from 'react'
 import { useCollection } from 'react-firebase-hooks/firestore'
 
 const AlbumsContainer = React.memo(() => {

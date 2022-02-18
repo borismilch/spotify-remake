@@ -12,10 +12,6 @@ const Greet = () => {
   const albumsRef= collection(firestore, 'albums')
   const [albums] = useCollection(query(albumsRef, limit(6)))
 
-  useEffect(() => {
-    console.log('rerender')
-  },[])
-
   return (
     <div className='flex flex-col'>
       <h1 className='text-title text-4xl p-2 font-bold'>Good Morning</h1>

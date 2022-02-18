@@ -7,10 +7,12 @@ export interface IAlbumModel {
   creationDate: { seconds: number },
   artistId: string
   description: string 
-  genre: string,
+  genre?: string,
   id?: string
   banner: string
   title: string
   bindColor: string
   tracks: ITrack[]
 }
+
+export interface IPlayList extends IAlbumModel {}

@@ -10,7 +10,7 @@ interface PlayerLine {
 
 const PlayerLine: React.FC<PlayerLine> = ({onChangeTime}) => {
 
-  const { currentTime, fullTime } = useAppSelector(state => state.song)
+  const { currentTime, fullTime } = useAppSelector(state => state.audio)
 
   return (
     <div className='flex items-center gap-2 '>
