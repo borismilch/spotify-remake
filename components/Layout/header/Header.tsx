@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { Navs, Avatar } from '.'
 import { useAppSelector } from '@/hooks/redux';
 
-const Header = () => {
+interface HeaderProps {
+  HeaderComponent: ReactElement<any, any>
+
+}
+
+const Header: React.FC<HeaderProps> = (props) => {
+
+  const { HeaderComponent = <></> } = props
 
   const { currentColor } = useAppSelector((state) => state.color)
   
@@ -15,7 +22,13 @@ const Header = () => {
 
     { currentColor !== '#121212' && <div className='absolute inset-0 bg-black bg-opacity-50' />}
 
-      <Navs />
+      <div className='flex items-center gap-5'>
+
+        <Navs />
+
+        {HeaderComponent}
+
+      </div>
 
       <Avatar />
 

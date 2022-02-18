@@ -22,6 +22,7 @@ const SongsTable: React.FC<SongTableProps> = (props) => {
       {tracks?.map((song: ITrack, idx: number) => (
         <SongsTableItem 
           idx={idx} 
+          key={song.id}
           song={song} 
           tracks={tracks}
         />

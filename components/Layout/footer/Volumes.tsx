@@ -10,7 +10,7 @@ const FooterVolumes = () => {
 
   const [savedVolume, setSavedVolume] = useState<number>(0)
 
-  const { volume } = useAppSelector(state => state.song)
+  const { volume } = useAppSelector(state => state.audio)
   const dispatch = useAppDispatch()
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
