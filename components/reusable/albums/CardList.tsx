@@ -10,18 +10,10 @@ interface CardListProps {
   title: string
 }
 
-const CardList: React.FC<CardListProps> = React.memo(({albums, title}) => {
+const CardList: React.FC<CardListProps> = ({albums, title}) => {
   const AlbumsCard = dynamic(() => import('./Card'))
 
   const calculateCount = () => Math.floor(window.innerWidth / 240)   
-
-  // const iterateAlbums = () => {
-  //   albums.forEach(item => {
-  //     tracks.forEach(async track => {
-  //       await TrackService.addTrack(item.id, track, item.title, item.banner)
-  //     })
-  //   })
-  // }
 
 
   return (
@@ -46,6 +38,6 @@ const CardList: React.FC<CardListProps> = React.memo(({albums, title}) => {
       </div>
     </>
   )
-})
+}
 
-export default CardList
+export default React.memo(CardList)

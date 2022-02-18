@@ -17,7 +17,7 @@ const SidearNav = () => {
       <div className='flex flex-col p-4 pt-0'>
         {
           sidebarItems.map(item => (
-            <SidebarLink sidebarItem={item} />
+            <SidebarLink key={item.text} sidebarItem={item} />
           ))
         }
       </div>
