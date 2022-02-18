@@ -49,7 +49,7 @@ const AlbumContent: React.FC<AlbumContentProps> = (props) => {
       } 
     >
       <div className='p-2'>
-        <ActionButtons group={group} selectedTrack={currentAlbum.tracks[0]}  />
+        <ActionButtons tracks={readyTracks ? readyTracks : []} group={group} selectedTrack={currentAlbum.tracks[0]}  />
       </div>
 
       <TableContext.Provider value={contextValue}>
