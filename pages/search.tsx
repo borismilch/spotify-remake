@@ -1,14 +1,19 @@
 import React from 'react'
 
+import dynamic from 'next/dynamic'
+
 import { ProtectedRoute } from '@/components/auth'
 import Layout from '@/components/Layout'
 
 const Search = () => {
+  const SearchContent = dynamic(() => import('@/components/pages/search/SeachContent'))
+  const SearchField = dynamic(() => import('@/components/pages/search/SearchField'))
+
   return (
     <ProtectedRoute>
 
-      <Layout title='search | nedofy'>
-        <p className='text-title text-2xl'>search</p>
+      <Layout HeaderContent={<SearchField />} title='search | nedofy'>
+        <SearchContent />
       </Layout>
       
     </ProtectedRoute>

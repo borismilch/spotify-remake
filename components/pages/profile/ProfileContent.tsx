@@ -26,6 +26,7 @@ const ProfileBanner = () => {
       bgColor={user?.bindColor}
       titleContent={
       <PageTitleContent 
+        rounded
         picture={
           <>
           {user &&  <Image
@@ -49,8 +50,6 @@ const ProfileBanner = () => {
     >
       <AlbumList albums={albums as any} title={'Top albums for this month'} />
     </PageTitle>
-
-    
 
     </>
   )

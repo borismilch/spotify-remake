@@ -1,0 +1,5 @@
+export { default as CreateNewAlbum } from './CreateNewAlbumButton'
+export { default as CreateContent } from './CreateContent'
+export { default as EditNewAlbum } from './EditNewAlbum'
+export { default as CreateAlbumTracks } from './CreateAlbumTracks'
+export { default as CreateRecorModal } from './modal/CreateRecordModal'

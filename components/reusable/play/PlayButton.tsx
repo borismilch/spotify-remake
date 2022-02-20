@@ -20,7 +20,8 @@ interface PlayButtonProps {
   big?: boolean,
   thin?: boolean,
   index?: number,
-  tracks: ITrack[]
+  tracks: ITrack[],
+  noShadow?: boolean
 }
 
 const PlayButton: React.FC<PlayButtonProps> = (props) => {
@@ -32,7 +33,8 @@ const PlayButton: React.FC<PlayButtonProps> = (props) => {
      big = false,
      thin = false,
      index = 0,
-     tracks
+     tracks,
+     noShadow = false
   } = props
 
   const dispatch = useAppDispatch()
@@ -41,7 +43,7 @@ const PlayButton: React.FC<PlayButtonProps> = (props) => {
   const { paused } = useAppSelector(state => state.audio)
 
   const isSameTrack = currentTrack?.albumId === playedElement?.albumId &&  group === category
-  const isSameSong = isSameTrack && currentTrack.id === playedElement.id
+  const isSameSong = isSameTrack && currentTrack.id === playedElement?.id
 
   const isActive = isSong ? isSameSong : (isSameTrack)
   const thinButtoClass = isActive ? 'text-green-500' : 'text-title'
@@ -68,7 +70,7 @@ const PlayButton: React.FC<PlayButtonProps> = (props) => {
      !thin ? (
       <button 
         onClick={setOrPauseCurrent.bind(null)}
-        className={'play_button ' + (big && ('p-4 text-lg w-[58px] h-[58px]'))}
+        className={'play_button ' + (big && ('p-4 text-lg w-[58px] h-[58px] ') + (noShadow && 'shadow-transparent]'))}
       >
         { !(isActive && paused) ? 
           <FaPlay className=' text-black' />: 

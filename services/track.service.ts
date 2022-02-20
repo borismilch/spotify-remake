@@ -1,14 +1,22 @@
 import { firestore } from '@/lib/firebase'
-import { collection, addDoc, setDoc, deleteDoc, getDoc } from 'firebase/firestore'
-import { ITrack } from '../models'
+import { setDoc, deleteDoc, getDoc } from 'firebase/firestore'
+import { IAlbum, ITrack, IUser } from '../models'
 
 import { doc } from 'firebase/firestore'
 
-export default class TrackService {
-  static async addTrack (albumId: string, track: ITrack, albumName: string, albumImg: string): Promise<void> {
-    const trackRef = collection(firestore, 'tracks')
+import { uuid } from '@/utils/helpers'
 
-    await addDoc(trackRef, {...track, albumId, albumImg: 'https://firebasestorage.googleapis.com/v0/b/spoiityf.appspot.com/o/isaac.jpg?alt=media&token=cc176e7f-cefa-43a6-8640-7f1a6f5ecfe8', albumName})
+export default class TrackService {
+  static async addTrack (albumId: string, track: ITrack): Promise<void> {
+    const trackRef = doc(firestore, 'tracks', track.id)
+    const trackInAlbumRef = doc(firestore, 'albums', albumId, 'tracks', track.id)
+
+    await setDoc(trackRef, track)
+    await setDoc(trackInAlbumRef, track)
+  }
+
+  static async deleteTrack (albumId: string, trackId: string) {
+    await deleteDoc(doc(firestore, 'albums', albumId, 'tracks', trackId))
   }
 
   static async likeOrDislikeTrack (track: ITrack, userId: string) {
@@ -22,5 +30,27 @@ export default class TrackService {
     else {
       await setDoc(trackref,  track)
     }
+  }
+
+  static createTrack (user: IUser, album: IAlbum, data: {title: string, audio: string}): ITrack {
+
+    const id = uuid()
+
+    const newTrack: ITrack = {
+      audio: data.audio,
+      authorId: user.uid,
+      description: '...',
+      duration: 0,
+      title: data.title,
+      albumId: album.id,
+      albumImg: album.banner,
+      albumName: album.title,
+      authorName: user.displayName,
+      category: '',
+      id
+    }
+
+    return newTrack
+   
   }
 }

@@ -14,6 +14,10 @@ import { useNavigation } from '@/hooks/.'
 import { useAppDispatch } from '@/hooks/redux'
 import { useToggle } from '@/hooks/.'
 
+import { useAppSelector } from '@/hooks/redux'
+import { userSelector } from '@/store/selectors' 
+
+import { FaPen } from 'react-icons/fa'
 import { IDropItem } from '@/models/.'
 
 interface ActionButtonsProps {
@@ -29,8 +33,13 @@ interface ActionButtonsProps {
 const ActionButtons: React.FC<ActionButtonsProps> = (props) => {
 
   const DropList = dynamic(() => import('@/components/reusable/dropList/DropList'))
-
   const { pushRouter } = useNavigation()
+
+  const user = useAppSelector(userSelector)
+
+  const changeAlbum = () => {
+    
+  }
 
   const { 
     selectedTrack, 
@@ -50,7 +59,6 @@ const ActionButtons: React.FC<ActionButtonsProps> = (props) => {
     dispatch(setCurrentTrack(tracks[0]))
     pushRouter('/queue')
   }
-
 
   const dropItems: IDropItem[] = [
     {
@@ -80,10 +88,13 @@ const ActionButtons: React.FC<ActionButtonsProps> = (props) => {
         onclick={ () => {} }
       />}
 
+     { user.uid === selectedTrack.authorId &&  <AppIcon
+        Icon={<FaPen className='text-2xl app_icon' />} 
+        onclick={changeOpen.bind(null, !open)}
+      />}
 
       <div className='relative'>
       <AppIcon
-      
         Icon={<RiMoreLine className='text-4xl app_icon' />} 
         onclick={changeOpen.bind(null, !open)}
       />

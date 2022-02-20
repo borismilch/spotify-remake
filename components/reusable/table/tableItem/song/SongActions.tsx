@@ -39,6 +39,7 @@ const SongActions: React.FC<SongActionsProps> = (props) => {
      isPlaylist = false, 
      playlistId = '',
      showAlbum = false,
+     needLike = true,
      onDelete
   } = useContext<TableContextProps>(TableContext)
 
@@ -47,6 +48,7 @@ const SongActions: React.FC<SongActionsProps> = (props) => {
   }
 
   const deletethisItem = async () => {
+    console.log('songid', song)
     await onDelete(playlistId, song.id, user.uid)
   }
 
@@ -64,6 +66,7 @@ const SongActions: React.FC<SongActionsProps> = (props) => {
 
       <div className='text-desc flex gap-3 items-center text-sm'>
 
+      { needLike &&  <>
        { !isLiked ?  
            (<AppIcon
             onclick={rateTrack}
@@ -76,6 +79,7 @@ const SongActions: React.FC<SongActionsProps> = (props) => {
             />
           )
        }
+       </>}
         
 
         <p className='font-semibold '>

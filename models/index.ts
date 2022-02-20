@@ -5,7 +5,7 @@ export type { IDropItem } from './static/DropItems'
 export type {IAlbumModel as IAlbum, IPlayList} from './albums/IAlbumModel'
 export type { ITrack } from './albums/ITrack'
 export type { IUser } from './session/IUser'
-
+export type { ICategoryItem } from './static/CategoryItem'
 
 export interface ModalPayload {
   value: string, 

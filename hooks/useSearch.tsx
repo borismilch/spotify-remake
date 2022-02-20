@@ -12,7 +12,7 @@ const useSearch = (query: string, excludeId: string) => {
   const { user } = useAppSelector(state => state.user)
 
   const collectionRef = collection(firestore, 'tracks')
-  const playlistExclude = collection(firestore, 'users', user.uid, 'playlists', excludeId, 'exclude')
+  const playlistExclude = collection(firestore, 'users', user?.uid || 's', 'playlists', excludeId, 'exclude')
   const [songs] = useCollectionOnce(collectionRef)
   const [excludeItems] = useCollectionData(playlistExclude)
   const exclude = excludeItems?.map(item => item.id)

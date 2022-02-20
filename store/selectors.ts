@@ -24,3 +24,18 @@ export const userSelector = createSelector(
   (state: RootState) => state.user,
   (user) => user.user
 )
+
+export const searchSelector = createSelector(
+  (state: RootState) => state.search,
+  (search) => search.query
+)
+
+export const createAlbumSelector = createSelector(
+  (state: RootState) => state.createAlbum,
+  (createAlbum) => createAlbum.newAlbum
+)
+
+export const createAlbumTracksSelector = createSelector(
+  (state: RootState) => state.createAlbumTracks,
+  (stacks) => stacks.tracks
+)

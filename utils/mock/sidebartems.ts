@@ -16,7 +16,7 @@ export const sidebarItems: ISidebarLink[] = [
   {
     Icon: BiLibrary,
     text: 'Librar',
-    to: '/lib'
+    to: '/library'
   },
 
 ]

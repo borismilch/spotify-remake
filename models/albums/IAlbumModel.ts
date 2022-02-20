@@ -12,7 +12,8 @@ export interface IAlbumModel {
   banner: string
   title: string
   bindColor: string
-  tracks: ITrack[]
+  
+  authorName?: string
 }
 
 export interface IPlayList extends IAlbumModel {}

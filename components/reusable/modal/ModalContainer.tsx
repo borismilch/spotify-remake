@@ -33,6 +33,7 @@ const ModalContainer: React.FC<ModalProps> = (props) => {
           <h3 className='text-title text-2xl font-semibold '>{title}</h3>
 
           <AppIcon 
+            onclick={close}
             Icon={<IoMdClose className="app_icon text-desc text-2xl" />}
           />
         </div>

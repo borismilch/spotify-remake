@@ -7,7 +7,6 @@ import useSearch from '@/hooks/useSearch'
 import { IPlayList } from '@/models/.'
 
 import { SongsTableItem } from '@/components/reusable/table'
-
 import { TableContext } from 'contexts/'
 
 interface SongSearchTableProps {
@@ -25,7 +24,7 @@ const SongSearchTable: React.FC<SongSearchTableProps> = (props) => {
   const contextValue: TableContextProps = {
     group: 'search',
     isSearch: true,
-    isPlaylist: true,
+    isPlaylist: !!playlist.title,
     playlistId: playlist.id,
   }
   return (
@@ -56,6 +55,8 @@ const SongSearchTable: React.FC<SongSearchTableProps> = (props) => {
           </React.Suspense>
          ))
        }
+
+       {!filteredAlbums?.length && !filteredSongs?.length && <p className='text-title text-xl'>No results found...</p>}
     
     </div>
   )

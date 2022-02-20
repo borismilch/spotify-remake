@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = (props) => {
 
     { currentColor !== '#121212' && <div className='absolute inset-0 bg-black bg-opacity-50' />}
 
-      <div className='flex items-center gap-5'>
+      <div className='flex z-50 flex-grow items-center gap-5'>
 
         <Navs />
 

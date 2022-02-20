@@ -6,7 +6,7 @@ import { serverTimestamp } from "firebase/firestore";
 
 import { doc } from "firebase/firestore";
 
-const defaultImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5H4KVg2u4M7V1dCgIRcZ_WpoZrPP_3iELfQ&usqp=CAU'
+export const defaultImage = 'https://firebasestorage.googleapis.com/v0/b/spoiityf.appspot.com/o/newlaceholder.png?alt=media&token=3c0d6841-0bae-4918-a4a9-5ced0d32b3b4'
 
 export interface PlaylistPayload {
   banner: string,
@@ -72,14 +72,13 @@ export default class PlaylistService {
     const newPlaylist: IAlbum = {
       name,
       artist: user.displayName,
-
       artistId: user.uid,
       banner: defaultImage,
       bindColor: '#212121',
       creationDate: serverTimestamp() as any,
       description: '',
       title: name,
-      tracks: [],
+    
       genre: 'playlist'
     }
 

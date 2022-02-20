@@ -32,7 +32,8 @@ const useAudioPlayer = (audio: RefObject<HTMLAudioElement>) => {
 
   
     audio.current.onloadedmetadata = () => {
-      dispatch(setFullTime(audio?.current.duration))
+      console.log(currentTrack.duration, 'from hook')
+      dispatch(setFullTime(currentTrack.duration))
     }
 
     audio.current.onended = () => {

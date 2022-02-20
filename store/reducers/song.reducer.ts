@@ -60,9 +60,16 @@ const slice = createSlice({
         state.currentTrack = state.queue[state.currentIndex]
       }
     },
+
+    deleteSong: (state) => {
+      state.currentIndex = 0
+      state.currentTrack = null
+      state.queue = []
+      state.group = ''
+    }
   }
 })
 
 export const songReducer = slice.reducer 
 
-export const { setCurrentTrack, setCurrentIndex, setQueue, goNext, goPrevios, setGroup } = slice.actions
+export const { setCurrentTrack, deleteSong, setCurrentIndex, setQueue, goNext, goPrevios, setGroup } = slice.actions

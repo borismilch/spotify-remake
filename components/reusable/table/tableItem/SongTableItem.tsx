@@ -30,15 +30,11 @@ const SongTableItem: React.FC<SongTableItemProps> = (props) => {
 
   const {
     group, 
-    isPlaylist, 
     isSearch, 
-    needDelete, 
     needLoading, 
-    onDelete, 
-    playlistId
   } = useContext<TableContextProps>(TableContext)
 
-  const { currentTrack, currentIndex } = useAppSelector(state => state.song)
+  const { currentTrack } = useAppSelector(state => state.song)
 
   const isSameTrack = currentTrack?.albumId === song?.albumId 
   const isSameSong = isSameTrack && song.id === currentTrack.id
@@ -51,10 +47,16 @@ const SongTableItem: React.FC<SongTableItemProps> = (props) => {
   return (
     <div className={'song_item group px-3 relative'}>
 
-      <div className={'flex items-center w-full justify-between ' + (!totalyLoaded && 'opacity-0 hidden')}>
+      <div className={
+        'flex items-center w-full justify-between ' + 
+        (!totalyLoaded && 'opacity-0 hidden')}
+      >
       <div className='flex items-center gap-3'>
 
-        <p className={`table_number_enumaration w-[40px]` + (isSameSong && 'text-green-500')}>
+        <p className={
+          `table_number_enumaration w-[40px]` + 
+          (isSameSong && 'text-green-500')
+        }>
         {idx + 1} 
         </p>
 
@@ -89,7 +91,6 @@ const SongTableItem: React.FC<SongTableItemProps> = (props) => {
 
         <SongActions
           song={song} 
-
         />
 
       </div>

@@ -31,7 +31,7 @@ const EditPlaylistTrigger: React.FC<EditPlaylistTriggerProps> = ({playlist}) => 
       <EditTrigger 
         onComplete={submitChage}
         startValue={{ image: playlist.banner, text: playlist.title }}
-        updateRef={playlistRef}
+       
       />
     </>
   )
