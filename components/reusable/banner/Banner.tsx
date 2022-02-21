@@ -38,6 +38,7 @@ const LikesBanner: React.FC<BannerProps> = (props) => {
         {
          chips.map((item, idx) => (
           <p 
+            key={idx}
             className={'font-semibold whitespace-nowrap flex items-center gap-2 text-title ' + 
             (!(idx % 2 === 0 ) && 'text-opacity-70')}>
               {item} 

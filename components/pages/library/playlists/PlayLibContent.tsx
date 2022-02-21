@@ -35,6 +35,7 @@ const PlayLibContent = () => {
         {
           readyArr?.map((item, idx) => (
             <Card 
+              key={item.id}
               album={{...item, description: 'Playlist №' + idx + 1} as any} 
               category={'playlist'}
               secondref={gettracksRef(item.id)} 
