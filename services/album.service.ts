@@ -21,6 +21,8 @@ export default class AlbumService {
   static async deleteAlbum (albumId: string) {
     const fireref = doc(firestore, 'albums', albumId)
 
+    console.log(albumId)
+
     await deleteDoc(fireref)
   }
 

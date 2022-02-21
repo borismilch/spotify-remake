@@ -41,6 +41,10 @@
     @apply relative overflow-hidden w-[80px] h-[80px] shadow-sm shadow-[#121212] flex-shrink-0
   }
 
+  .drop_item {
+    @apply flex gap-2 w-[150px] justify-between transition-all p-2 duration-200 cursor-pointer bg-cardHover hover:bg-light items-center
+  }
+
   .card_content {
     @apply relative h-[160px]  rounded-md shadow-lg shadow-[#121221]  w-full overflow-hidden
   }

@@ -7,6 +7,7 @@ import { audioReducer } from './audio.reducer'
 import { searchReducer } from './search.reducer'
 import { createAlbumReducer } from './create-album.reducer'
 import { createAlbumTracksReducer } from './create-album-tracks.reducer'
+import { scrollReducer } from './scroll.reducer'
 
 export const rootReducer = combineReducers({
   color: colorReducer,
@@ -16,5 +17,6 @@ export const rootReducer = combineReducers({
   audio: audioReducer,
   search: searchReducer,
   createAlbum: createAlbumReducer,
-  createAlbumTracks: createAlbumTracksReducer
+  createAlbumTracks: createAlbumTracksReducer,
+  scroll: scrollReducer
 })

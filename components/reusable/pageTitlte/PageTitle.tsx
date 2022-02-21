@@ -3,7 +3,11 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 
 import { useAppDispatch } from '@/hooks/redux' 
 import { useEffect } from 'react'
-import { setCurrentColor } from '@/store/actions'
+import { setCurrentColor, ScrollReducerctions } from '@/store/actions'
+
+import { useRef } from 'react'
+
+import { useScrollHeight } from '@/hooks/.'
 
 import { auth } from '@/lib/firebase'
 
@@ -17,18 +21,26 @@ const PageTitle: React.FC<PageTitlteProps> = (props) => {
   const { bgColor, titleContent, children } = props
   const [user] = useAuthState(auth)
 
+  const scrollAreaRef = useRef(null)
+
+  const d = useScrollHeight(scrollAreaRef)
+
   const dispatch = useAppDispatch()
 
   const drawHeader = () => {
-    dispatch(setCurrentColor(bgColor)) 
+    dispatch(setCurrentColor(bgColor))
+
   }
 
   useEffect(() => {
     drawHeader()
+  
   }, [])
 
   return (
-    <div className='flex flex-col h-full relative overflow-auto scrollbar-none'>
+    <div 
+      ref={scrollAreaRef}
+      className='flex flex-col h-full relative overflow-auto scrollbar-none'>
 
     <div className={`inset-0 -top-[70px] absolute h-[345px]`} style={{backgroundColor: bgColor}} />
     <div className={`inset-0 -top-[70px] absolute h-[345px] z-10 lay`} />

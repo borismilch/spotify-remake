@@ -38,7 +38,9 @@ const GreetItem: React.FC<{album: IAlbum}> = ({album}) => {
       onMouseLeave={setDefaultColor.bind(null)}
       className='greet_item group relative'>
 
-      <div className={'flex items-center justify-between w-full ' + (!loaded && 'hidden')}>
+      <div className={
+        'flex items-center justify-between w-full ' +
+       (!loaded && 'hidden')}>
 
         { album.banner && <div className='album_image_small '>
           <img
@@ -51,12 +53,15 @@ const GreetItem: React.FC<{album: IAlbum}> = ({album}) => {
 
         <div className='flex p-2 group items-center w-full justify-between '>
 
-          <h3 className='text-title font-semibold truncate'>{album.title}</h3>
+          <h3 className='text-title font-semibold truncate'>
+            {album.title}
+          </h3>
 
-          <div className=' transition-all duration-300 opacity-0  group-hover:opacity-100'>
+          <div className='
+           transition-all duration-300 opacity-0  group-hover:opacity-100
+          '>
             <PlayButton 
               category='greet'
-              onClick={() => {}}
               playedElement={readyTracks ? readyTracks[0] : {}}
               tracks={tracks as any}
             />

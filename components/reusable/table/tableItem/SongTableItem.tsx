@@ -14,6 +14,8 @@ import { SongActions, SongTitle } from './song'
 import { useContext } from 'react'
 import { TableContext, TableContextProps } from '@/context/.'
 
+import { selectCurrentTrack } from '@/store/selectors'
+
 interface SongTableItemProps {
   song: ITrack
   idx: number
@@ -34,10 +36,11 @@ const SongTableItem: React.FC<SongTableItemProps> = (props) => {
     needLoading, 
   } = useContext<TableContextProps>(TableContext)
 
-  const { currentTrack } = useAppSelector(state => state.song)
+  const currentTrack = useAppSelector(selectCurrentTrack)
 
   const isSameTrack = currentTrack?.albumId === song?.albumId 
   const isSameSong = isSameTrack && song.id === currentTrack.id
+  const isIdentical = isSameSong && group === currentTrack.category
 
   const [loaded, onLoad] = useImageLoader()
   const {mounted} = useMounted()
@@ -83,7 +86,7 @@ const SongTableItem: React.FC<SongTableItemProps> = (props) => {
           </div>}
 
           <SongTitle 
-            isSameSong={isSameSong} 
+            isSameSong={isIdentical} 
           
             song={song} 
           />

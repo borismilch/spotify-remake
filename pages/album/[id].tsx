@@ -14,15 +14,20 @@ import dynamic from 'next/dynamic'
 const AlbumPage = () => {
 
   const { query: { id } } = useNavigation()
-
-  const albumref = doc(firestore, 'albums', id ? id.toString().split('_')[0] : 'dd')
+  const albumref = doc(
+    firestore, 'albums', 
+    id ? id.toString().split('_')[0] : 'dd'
+  )
   const [currentAlbum] = useDocumentDataOnce<DocumentData>(albumref)
 
-    const PageContent = dynamic (() => import('@/components/pages/albumPage/AlbumContent'))
+  const PageContent = dynamic (() => import('@/components/pages/albumPage/AlbumContent'))
+  const HeaderSongTitle = dynamic(() => import('@/components/reusable/HeaderSongTitle'))
 
   return (
     <ProtectedRoute>
-      <Layout title={currentAlbum?.title + ' | nedofy'} >
+      <Layout 
+        HeaderContent={<HeaderSongTitle fireRef={albumref} currentAlbum={currentAlbum as any} />}
+        title={currentAlbum?.title + ' | nedofy'} >
 
       { currentAlbum && 
         <PageContent 
@@ -36,4 +41,4 @@ const AlbumPage = () => {
   )
 }
 
-export default AlbumPage
+export default React.memo(AlbumPage)

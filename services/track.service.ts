@@ -32,8 +32,9 @@ export default class TrackService {
     }
   }
 
-  static createTrack (user: IUser, album: IAlbum, data: {title: string, audio: string}): ITrack {
-
+  static createTrack (
+    user: IUser, album: IAlbum, data: {title: string, audio: string}
+  ): ITrack {
     const id = uuid()
 
     const newTrack: ITrack = {
@@ -47,7 +48,8 @@ export default class TrackService {
       albumName: album.title,
       authorName: user.displayName,
       category: '',
-      id
+      id,
+      createdAt: Date.now()
     }
 
     return newTrack

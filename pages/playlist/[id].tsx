@@ -31,9 +31,21 @@ const PlaylistRoute = () => {
   const PlayListContent = dynamic(() => import(
     '@/components/pages/playlistPage/PlaylistContent'))
 
+  const HeaderSongButtons = dynamic(() => import(
+    '@/components/reusable/HeaderSongTitle'
+  ))
+
   return (
     <ProtectedRoute>
-      <Mainlayout title={playlist?.data()?.title + ' | playlists'} >
+      <Mainlayout 
+        HeaderContent={
+          <HeaderSongButtons 
+            fireRef={playlistRef} 
+            group={'playlist'} 
+            currentAlbum={playlist as any} 
+          />
+        }
+        title={playlist?.data()?.title + ' | playlists'} >
 
       {playlist && playlistId && <PlayListContent playlist={{ ...playlist.data(), id: playlist.id } as IAlbum} />}
 

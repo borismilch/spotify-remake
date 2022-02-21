@@ -19,7 +19,10 @@ const Greet = () => {
       <div className='grid grid-cols-2 p-3 gap-4 gap-x-6 grid-rows-2 lg:grid-cols-3 w-full'>
         {
           albums?.docs?.map(doc => (
-            <GreetItem key={doc.id} album={{...doc.data(), id: doc.id} as IAlbum} />
+            <GreetItem 
+              key={doc.id}
+               album={{...doc.data(), id: doc.id} as IAlbum} 
+              />
           ))
         }
       </div>

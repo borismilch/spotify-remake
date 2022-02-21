@@ -8,3 +8,5 @@ export * as AlbumsStore from "./reducers/album.reducer"
 export { setSearch } from './reducers/search.reducer'
 export {CreatealbumActions} from './reducers/create-album.reducer'
 export { CreateAlbumtracksStore } from './reducers/create-album-tracks.reducer'
+
+export { ScrollReducerctions } from './reducers/scroll.reducer'

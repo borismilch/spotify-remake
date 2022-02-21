@@ -39,3 +39,8 @@ export const createAlbumTracksSelector = createSelector(
   (state: RootState) => state.createAlbumTracks,
   (stacks) => stacks.tracks
 )
+
+export const scrollTopSelector = createSelector(
+  (state: RootState) => state.scroll,
+  (scroll) => scroll.scrollTop
+)

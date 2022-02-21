@@ -17,12 +17,13 @@ interface CardProps {
   album: IAlbum, 
   category: string,
   secondref?: CollectionReference<DocumentData>
-  editable?: boolean
+  editable?: boolean,
+  isArtist?: boolean
 }
 
 const Card: React.FC<CardProps> = (props) => {
 
-  const {album, category, secondref, editable = false} = props
+  const {album, category, secondref, editable = false, isArtist = false} = props
 
   const fireref = collection(firestore, 'albums', album.id, 'tracks')
 
@@ -39,18 +40,21 @@ const Card: React.FC<CardProps> = (props) => {
 
   return (
     <div
-      onClick={pushRouter.bind(null, '/album/' + album.id + "_" + category)}
+      onClick={pushRouter.bind(null, isArtist ? '/artist/' : '/album/' + album.id + "_" + category)}
       className='card_wrapper group relative min-h-[270px]'>
 
-      {<div className={'flex flex-col ' + (!loaded && 'opacity-0 absolute invisible')}>      
-        <div className='card_content'>
+      {<div className={
+        'flex flex-col ' + 
+        (!loaded && 'opacity-0 absolute invisible')}
+      >      
+        <div className={'card_content ' + (isArtist && 'rounded-full')}>
           {album.banner &&  <img 
               onLoad={onLoad.bind(null)}
               src={album.banner}
               alt={album.title}
               className={'object-cover w-full h-full'} />
           } 
-          </div>
+        </div>
         
         <div className='flex flex-col pt-4'>
           <h3 className='

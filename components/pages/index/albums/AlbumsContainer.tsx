@@ -8,7 +8,15 @@ import { IAlbum } from '@/models/.'
 
 import { useCollection } from 'react-firebase-hooks/firestore'
 
-const AlbumsContainer = () => {
+interface AlbumsContainerProps {
+  reversed?: boolean,
+  title: string
+}
+
+const AlbumsContainer: React.FC<AlbumsContainerProps> = (props) => {
+
+  const { title, reversed } = props
+
   const albumsRef = collection(firestore, 'albums')
   const AlbumsList = dynamic(() => import('@/components/reusable/albums/CardList'))
 
@@ -16,8 +24,12 @@ const AlbumsContainer = () => {
 
   return (
     <div className='flex flex-col'>
-      {albums && <AlbumsList title='Most popular' albums={
-        albums.docs.map(item => ({...item.data(), id: item.id })) as IAlbum[]
+      {albums && 
+      <AlbumsList title={title} albums={
+        reversed ? 
+        albums.docs.reverse().map(item => ({...item.data(), id: item.id })) as IAlbum[] :
+        albums.docs.map(item => ({...item.data(), id: item.id })) as IAlbum[] 
+
       } />}
     </div>
   )

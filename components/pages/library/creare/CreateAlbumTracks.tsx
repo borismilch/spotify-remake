@@ -22,18 +22,16 @@ interface CreateAlbumTracksProps {
 }
 
 const CreateAlbumTracks: React.FC<CreateAlbumTracksProps> = (props) => {
-
   const { album, onAdd, onDelete, albumId = '' } = props
 
   const user = useAppSelector(userSelector)
-  const tracksRef = collection(firestore, 'albums', albumId, 'tracks')
+  const tracksRef = collection(firestore, 'albums', albumId || 'dd', 'tracks')
 
   const tracks = albumId ?
    useCollectionData(tracksRef) : 
    useAppSelector(createAlbumTracksSelector)
 
   const dispatch = useAppDispatch()
- 
   const currentTrack = useAppSelector(selectCurrentTrack)
 
   const contextValue: TableContextProps = {
@@ -48,9 +46,6 @@ const CreateAlbumTracks: React.FC<CreateAlbumTracksProps> = (props) => {
     if (playlistId === album.id && trackId === currentTrack.id) {
       dispatch(deleteSong())
     }
-
-    console.log('item ket', trackId)
-
     onDelete(trackId)
   }
 

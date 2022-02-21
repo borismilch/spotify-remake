@@ -2,7 +2,6 @@ import Layout from '../components/Layout';
 
 import { NextPage } from 'next';
 import dynamic from 'next/dynamic'
-
 import { ProtectedRoute } from '@/components/auth';
 
 import { ColorOverlay } from '@/components/reusable';
@@ -15,7 +14,6 @@ const Home: NextPage = () => {
   const Greet = dynamic(() => import('@/components/pages/index/greet/Greet'))
   const AlbumsContainer = dynamic(() => import('@/components/pages/index/albums/AlbumsContainer'))
 
- 
   return (
     <ProtectedRoute>
       <Layout title={user?.displayName + ' | Shopify'}>
@@ -25,7 +23,9 @@ const Home: NextPage = () => {
            <Greet />
 
          <div className='flex-grow flex flex-col'>
-            <AlbumsContainer />
+            <AlbumsContainer title='Most popular' />
+
+            <AlbumsContainer title="Resent" reversed />
          </div>
  
         </div>  

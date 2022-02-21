@@ -10,4 +10,5 @@ export interface ITrack {
   albumImg?: string
   category?: string 
   id?: string
+  createdAt: number
 }

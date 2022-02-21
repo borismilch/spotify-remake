@@ -95,4 +95,4 @@ const PlayButton: React.FC<PlayButtonProps> = (props) => {
   )
 }
 
-export default PlayButton
+export default React.memo(PlayButton)
