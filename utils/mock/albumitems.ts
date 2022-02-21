@@ -13,7 +13,7 @@ export const albumItems: IAlbum[] = [
     genre: 'Metal',
     banner: 'https://firebasestorage.googleapis.com/v0/b/spoiityf.appspot.com/o/isaac.jpg?alt=media&token=cc176e7f-cefa-43a6-8640-7f1a6f5ecfe8',
     title: 'Antibirth',
-    tracks: tracks,
+   
     bindColor: '#212121'
   },
   {
@@ -25,7 +25,7 @@ export const albumItems: IAlbum[] = [
     genre: 'Metal',
     banner: 'https://firebasestorage.googleapis.com/v0/b/spoiityf.appspot.com/o/isaac.jpg?alt=media&token=cc176e7f-cefa-43a6-8640-7f1a6f5ecfe8',
     title: 'Doooma',
-    tracks: tracks.reverse(),
+    
     bindColor: '#212121'
   }
 ]
