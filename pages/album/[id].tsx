@@ -26,7 +26,7 @@ const AlbumPage = () => {
   return (
     <ProtectedRoute>
       <Layout 
-        HeaderContent={<HeaderSongTitle group={id.toString().split('_')[1]} fireRef={albumref} currentAlbum={currentAlbum as any} />}
+        HeaderContent={<HeaderSongTitle group={id?.toString().split('_')[1]} fireRef={albumref} currentAlbum={currentAlbum as any} />}
         title={currentAlbum?.title + ' | nedofy'} >
 
       { currentAlbum && 
