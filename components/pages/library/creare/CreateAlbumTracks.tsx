@@ -24,15 +24,17 @@ interface CreateAlbumTracksProps {
 const CreateAlbumTracks: React.FC<CreateAlbumTracksProps> = (props) => {
   const { album, onAdd, onDelete, albumId = '' } = props
 
+  const dispatch = useAppDispatch()
+
   const user = useAppSelector(userSelector)
+  const currentTrack = useAppSelector(selectCurrentTrack)
+
   const tracksRef = collection(firestore, 'albums', albumId || 'dd', 'tracks')
 
   const tracks = albumId ?
    useCollectionData(tracksRef) : 
    useAppSelector(createAlbumTracksSelector)
-
-  const dispatch = useAppDispatch()
-  const currentTrack = useAppSelector(selectCurrentTrack)
+ 
 
   const contextValue: TableContextProps = {
     group: album?.title || '',
