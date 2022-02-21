@@ -21,7 +21,7 @@ const AlbumContent: React.FC<AlbumContentProps> = (props) => {
   const { currentAlbum, group } = props
   const fireref = collection(firestore, 'albums', currentAlbum.id.trim() , 'tracks')
   const [tracks] = useCollection(fireref)
-  const readyTracks: any[] = tracks?.docs.map(item => ({...item.data(), id: item.id}))
+const readyTracks: any[] = tracks?.docs.map(item => ({...item.data(), id: item.id}))
 
   const { pushRouter } = useNavigation()
 
