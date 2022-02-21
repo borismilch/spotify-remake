@@ -43,7 +43,7 @@ const PlaylistContent: React.FC<PlaylistContentProps> = ({playlist}) => {
         />
       } 
     >
-      <SongList playlistId={playlist.id} />
+    <SongList playlistId={playlist.id} />
 
       <PlaylistSearch playList={playlist} />
 

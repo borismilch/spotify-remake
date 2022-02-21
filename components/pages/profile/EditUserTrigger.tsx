@@ -28,7 +28,7 @@ const EditUserTrigger = () => {
       <EditTrigger 
         onComplete={submitChage}
         startValue={{ image: user?.photoURL, text: user?.displayName }}
-        updateRef={userRef}
+        
       />
     </>
   )

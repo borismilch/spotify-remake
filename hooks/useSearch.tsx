@@ -29,7 +29,7 @@ const useSearch = (query: string, excludeId: string) => {
     (includeQuery(item.title) || includeQuery(item.albumName)) && !exclude?.includes(item.id as any)
   ))
 
-  const filteredAlbums = albums?.map(item => ({ ...item, tracks: [] } as IAlbum))
+  const filteredAlbums = albums?.map(item => ({ ...item } as IAlbum))
   .filter(item => includeQuery(item.title) || includeQuery(item.artist))
 
   return {filteredSongs, filteredAlbums}

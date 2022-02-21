@@ -15,7 +15,7 @@ const PlaylistSearch: React.FC<PlayListSearchProps> = ({playList}) => {
   const [query, bind, clean, changeValue] = useInputValue()
   const [open, changeOpen] = useToggle(true)
 
-  const showtable = (!open && playList.tracks.length === 0) || query
+  const showtable = (!open) || query
 
   return (
     <div className='flex flex-col'>
