@@ -23,19 +23,15 @@ interface CreateAlbumTracksProps {
 
 const CreateAlbumTracks: React.FC<CreateAlbumTracksProps> = (props) => {
   const { album, onAdd, onDelete, albumId = '' } = props
-
   const dispatch = useAppDispatch()
 
   const user = useAppSelector(userSelector)
   const currentTrack = useAppSelector(selectCurrentTrack)
-
   const tracksRef = collection(firestore, 'albums', albumId || 'dd', 'tracks')
 
-  const tracks = albumId ?
-   useCollectionData(tracksRef) : 
-   useAppSelector(createAlbumTracksSelector)
+  const [firetracks] = useCollectionData(tracksRef)
+  const storeTracks = useAppSelector(createAlbumTracksSelector)
  
-
   const contextValue: TableContextProps = {
     group: album?.title || '',
     needDelete: true,
@@ -90,9 +86,7 @@ const CreateAlbumTracks: React.FC<CreateAlbumTracksProps> = (props) => {
 
       <TableContext.Provider value={contextValue}>
         <SongsTable tracks={ 
-          tracks ? 
-          albumId? tracks[0]
-          : tracks as any : []
+          albumId ? firetracks ? firetracks as any : [] : storeTracks ? storeTracks : []
         } />
       </TableContext.Provider>
 
