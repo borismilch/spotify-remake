@@ -12,7 +12,7 @@ import { CreateAlbumtracksStore, CreatealbumActions } from '@/store/actions'
 const CreateNewAlbumButton = () => {
 
   const newAlbum = useAppSelector(createAlbumSelector)
-const tracks = useAppSelector(createAlbumTracksSelector)
+  const tracks = useAppSelector(createAlbumTracksSelector)
   const dispatch = useAppDispatch()
 
   const { pushRouter, router: { query: { id } } } = useNavigation()
@@ -21,7 +21,7 @@ const tracks = useAppSelector(createAlbumTracksSelector)
     await AlbumService.addNewAlbum(newAlbum)
 
     tracks.map(item => ({...item, albumName : newAlbum.title})).forEach(async track => {
-      await TrackService.addTrack(newAlbum.id, track, )
+      await TrackService.addTrack(newAlbum.id, track)
     })
 
     pushRouter('/album/' + (id? id : newAlbum.id))
@@ -30,9 +30,13 @@ const tracks = useAppSelector(createAlbumTracksSelector)
     dispatch(CreatealbumActions.clearAlbum())
   }
 
+  const saveChanges = ( ) => {
+    pushRouter('/album/' + (id? id : newAlbum.id))
+  }
+
   return (
     <button 
-      onClick={createNewAlbum}
+      onClick={id ? saveChanges : createNewAlbum}
       disabled={!id && !tracks.length}
       className='song_add_button disabled:opacity-50 w-[160px] m-0 border mr-3'>
        { id? "Save changes" : "Create new Album"}

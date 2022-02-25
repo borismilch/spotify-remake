@@ -16,10 +16,10 @@ const LikeActionButtons: React.FC<PlaylistActionProps> = (props) => {
     <>
      <ActionButtons 
        group={group}
-      tracks={tracks}
+       tracks={tracks}
        canPlay={tracks.length > 0}
        selectedTrack={tracks[0]}
-
+       isAlbum={false}
        canLike={false} 
     />
     </>

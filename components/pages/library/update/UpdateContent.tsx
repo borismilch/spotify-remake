@@ -11,7 +11,7 @@ import { firestore } from '@/lib/firebase'
 import { useDocumentData } from 'react-firebase-hooks/firestore'
 import { doc } from 'firebase/firestore'
 import { useNavigation } from '@/hooks/.'
-import { CardLoader } from '@/components/loaders'
+import { UpdateLoader } from '@/components/loaders'
 import { ITrack } from '@/models/.'
 import TrackService from '@/service/track.service'
 
@@ -80,7 +80,7 @@ const CreateContent: React.FC = () => {
 
     </PageTitle>}
 
-    {!album && <CardLoader />}
+    {!album && <UpdateLoader />}
 
     </>
   )  

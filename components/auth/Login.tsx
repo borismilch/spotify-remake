@@ -49,7 +49,7 @@ const Login = () => {
 
 
   return (
-    <div className='flex flex-col items-center w-screen h-screen bg-primary gap-4 justify-center'>
+    <div className='loadingPage'>
       <div className='relative w-[300px] h-[160px]'>
          <Image 
            src={'https://logos-world.net/wp-content/uploads/2020/09/Spotify-Symbol.png'}

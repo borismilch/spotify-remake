@@ -184,6 +184,10 @@
     @apply bg-gradient-to-t from-sky-400 to-blue-500
   }
 
+  .loadingPage {
+    @apply flex flex-col items-center w-screen h-screen bg-primary gap-4 justify-center
+  }
+
 }
 
 .logo {
@@ -273,4 +277,23 @@
   box-shadow: none;
   border: none;
   background: transparent;
+}
+
+.blob-2 {
+  width: 80px;
+  aspect-ratio: 1;
+  border: 10px solid #323232;
+  background: 
+    radial-gradient(farthest-side,#fff 98%,#212121 ) 0    0/20px 20px,
+    radial-gradient(farthest-side,#fff 98%,#212121 ) 100% 0/20px 20px,
+    radial-gradient(farthest-side,#fff 98%,#212121 ) 100% 100%/20px 20px,
+    radial-gradient(farthest-side,#fff 98%,#212121 ) 0 100%/20px 20px,
+    linear-gradient(#fff 0 0) center/40px 40px,
+    #323232;
+  background-repeat:no-repeat;
+  filter: blur(4px) contrast(10);
+  animation: b2 0.8s infinite;
+}
+@keyframes b2 {
+  100%  {background-position:100% 0,100% 100%,0 100%,0 0,center}
 }

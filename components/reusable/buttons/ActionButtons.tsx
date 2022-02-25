@@ -2,7 +2,6 @@ import React from 'react'
 
 import { FiHeart }  from 'react-icons/fi'
 import { PlayButton } from '@/components/reusable'
-import { RiMoreLine } from 'react-icons/ri'
 import AppIcon from '@/components/icons'
 import { ITrack } from '@/models/.'
 import { setQueue, setCurrentTrack } from '@/store/actions'
@@ -22,6 +21,7 @@ interface ActionButtonsProps {
   canPlay?: boolean
   canLike?: boolean
   tracks: ITrack[]
+  isAlbum?: boolean
   deleteFunc?: () => Promise<void>
 
 }
@@ -36,7 +36,8 @@ const ActionButtons: React.FC<ActionButtonsProps> = (props) => {
     group, 
     canPlay = true, 
     canLike = true, 
-    tracks,  
+    tracks, 
+    isAlbum = false,
     deleteFunc = () => {}
   } = props
 
@@ -63,7 +64,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = (props) => {
         onclick={ () => {} }
       />}
 
-      { user.uid === selectedTrack?.authorId &&  <AppIcon
+      { user.uid === selectedTrack?.authorId && isAlbum && <AppIcon
         Icon={<FaPen className='text-xl app_icon' />} 
         onclick={
           pushRouter.bind(

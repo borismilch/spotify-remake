@@ -6,11 +6,12 @@ import { useAppDispatch, useAppSelector } from './redux'
 import { goNext } from '@/store/actions'
 import { setCurrentTime, setFullTime, setPaused } from '@/store/actions'
 
+import { selectCurrentTrack } from '@/store/selectors'
 
 const useAudioPlayer = (audio: RefObject<HTMLAudioElement>) => {
 
   const dispatch = useAppDispatch()
-  const { currentTrack } = useAppSelector(state => state.song)
+  const currentTrack = useAppSelector(selectCurrentTrack)
   const { currentTime, fullTime, volume, paused } = useAppSelector(state => state.audio)
   
   useEffect(() => {
@@ -32,7 +33,6 @@ const useAudioPlayer = (audio: RefObject<HTMLAudioElement>) => {
 
   
     audio.current.onloadedmetadata = () => {
-      console.log(currentTrack.duration, 'from hook')
       dispatch(setFullTime(currentTrack.duration))
     }
 
@@ -41,7 +41,7 @@ const useAudioPlayer = (audio: RefObject<HTMLAudioElement>) => {
     }
 
     if (currentTrack ) {
-      startAudio()
+     
       audio.current.currentTime = currentTime
     }
 

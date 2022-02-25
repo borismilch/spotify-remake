@@ -2,7 +2,9 @@ import React from 'react'
 
 const LoginLoader = () => {
   return (
-    <div>LoDING...</div>
+    <div className='loadingPage'>
+    <div className="blob-2"></div>
+    </div>
   )
 }
 

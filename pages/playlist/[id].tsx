@@ -42,7 +42,7 @@ const PlaylistRoute = () => {
           <HeaderSongButtons 
             fireRef={playlistRef} 
             group={'playlist'} 
-            currentAlbum={playlist as any} 
+            currentAlbum={playlist?.data() as any} 
           />
         }
         title={playlist?.data()?.title + ' | playlists'} >

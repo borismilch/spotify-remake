@@ -1,14 +1,10 @@
 import { IAlbum } from '@/models/.'
-import React, { useEffect } from 'react'
-
-import { useFirestoreData } from '@/hooks/.'
+import React from 'react'
 
 import { useAppSelector } from '@/hooks/redux'
 import { scrollTopSelector } from '@/store/selectors'
 
 import { PlayButton } from '@/components/reusable'
-
-import { firestore } from '@/lib/firebase'
 import { collection, DocumentData, DocumentReference } from 'firebase/firestore'
 import { useCollectionDataOnce } from 'react-firebase-hooks/firestore'
 
@@ -27,6 +23,8 @@ const HeaderSongTitle: React.FC<HeaderSongTitleProps> = (props) => {
   
   const scrollTop = useAppSelector(scrollTopSelector)
 
+  console.log(currentAlbum)
+
   return (
     <div className={
       'flex items-center transition-all duration-300 gap-3 opacity-0 ' + 
@@ -39,7 +37,7 @@ const HeaderSongTitle: React.FC<HeaderSongTitleProps> = (props) => {
 
       />
 
-      <p className='text-title text-lg font-bold'>{currentAlbum?.title}</p>
+    <p className='text-title text-lg font-bold'>{currentAlbum?.title}</p>
       
     </div>
   )
